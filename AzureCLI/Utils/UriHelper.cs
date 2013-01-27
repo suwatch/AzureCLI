@@ -14,7 +14,15 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/?properties=publishingusers",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
+                profile.GetSubscriptionId());
+        }
+
+        public static string GetPublishingCredentialsUri()
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/services/webspaces/?properties=publishingCredentials",
+                profile.GetUrl(),
                 profile.GetSubscriptionId());
         }
 
@@ -22,7 +30,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId());
         }
 
@@ -30,7 +38,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace);
         }
@@ -39,7 +47,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites{3}",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace,
                 includesProperties ? ("/?" + PropertiesToInclude) : String.Empty);
@@ -49,7 +57,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}{4}",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace,
                 siteName,
@@ -60,7 +68,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}/config",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace,
                 siteName);
@@ -70,7 +78,7 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}/repository",
-                profile.Url.TrimEnd('/'),
+                profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace,
                 siteName);

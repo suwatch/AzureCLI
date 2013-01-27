@@ -11,17 +11,19 @@ namespace Samples
     {
         static void BasicTests()
         {
+            SetGetPublishingCredentials();
+
             DumpWebSpaces();
 
-            DumpWebSpace("eastuswebspace");
+            //DumpWebSpace("eastuswebspace");
 
-            DumpWebSites();
+            //DumpWebSites();
 
-            CreateWebSite("azurecli01", "eastuswebspace");
+            //CreateWebSite("azurecli01", "eastuswebspace");
 
-            DumpWebSite("azurecli01", "eastuswebspace");
+            //DumpWebSite("azurecli01", "eastuswebspace");
 
-            DeleteWebSite("azurecli01", "eastuswebspace");
+            //DeleteWebSite("azurecli01", "eastuswebspace");
         }
 
         static void DumpWebSpaces()
@@ -66,6 +68,14 @@ namespace Samples
             Console.WriteLine(item.Name);
             Console.WriteLine(item.WebSpace);
             Console.WriteLine(item);
+        }
+
+        static void SetGetPublishingCredentials()
+        {
+            var item = WebSpace.GetPublishingCredentialsAsync().Result;
+            Console.WriteLine(item);
+
+            //WebSpace.SetPublishingCredentialsAsync("username", "password").Wait();
         }
     }
 }

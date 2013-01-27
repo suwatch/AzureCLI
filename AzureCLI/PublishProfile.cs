@@ -16,6 +16,10 @@ namespace AzureCLI
 
         public static PublishProfile Current { get; private set; }
 
+        // SchemaVersion="2.0"
+        [XmlAttribute]
+        public string SchemaVersion { get; set; }
+
         [XmlAttribute] 
         public string PublishMethod { get; set; }
 
@@ -36,15 +40,17 @@ namespace AzureCLI
             return this.Subscriptions[0].Id;
         }
 
-        internal X509Certificate2 GetCertificate()
+        internal string GetUrl()
         {
-            return new X509Certificate2(Convert.FromBase64String(this.ManagementCertificate), this.ManagementCertificatePassword);
+            return (this.Url ?? this.Subscriptions[0].ServiceManagementUrl).TrimEnd('/');
         }
 
-        internal static async Task<string[]> GetPublishingUsersAsync()
+        internal X509Certificate2 GetCertificate()
         {
-            string url = UriHelper.GetPublishingUsersUri();
-            return await RdfeHelper.GetAsAsync<string[]>(url);
+            return new X509Certificate2(
+                Convert.FromBase64String(this.ManagementCertificate ?? this.Subscriptions[0].ManagementCertificate), 
+                this.ManagementCertificatePassword ?? this.Subscriptions[0].ManagementCertificatePassword
+            );
         }
         
         public class Subscription
@@ -54,6 +60,15 @@ namespace AzureCLI
 
             [XmlAttribute]
             public string Name { get; set; }
+
+            [XmlAttribute]
+            public string ServiceManagementUrl { get; set; }
+
+            [XmlAttribute]
+            public string ManagementCertificate { get; set; }
+
+            [XmlAttribute]
+            public string ManagementCertificatePassword { get; set; }
         }
     }
 }

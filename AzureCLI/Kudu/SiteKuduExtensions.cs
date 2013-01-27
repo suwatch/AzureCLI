@@ -28,14 +28,14 @@ namespace AzureCLI.Kudu
 
         public static async Task<Uri> GetKuduGitUriAsync(this WebSite site)
         {
-            string[] userNames = await PublishProfile.GetPublishingUsersAsync();
+            PublishingCredentials credentials = await WebSpace.GetPublishingCredentialsAsync();
 
             string repositoryUri = (from p in site.SiteProperties.Properties
                                     where p.Name == Constants.RepositoryUri
                                     select p.Value).First();
 
             UriBuilder uri = new UriBuilder(repositoryUri);
-            uri.UserName = userNames.FirstOrDefault();
+            uri.UserName = credentials.PublishingUserName;
             uri.Path = site.Name + ".git";
             return uri.Uri;
         }

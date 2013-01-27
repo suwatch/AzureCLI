@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
@@ -54,6 +55,7 @@ namespace AzureCLI.Utils
 
                     // TODO: workaround RDFE bug that the response's header is fixed 'application/xml'
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                     return await response.Content.ReadAsAsync<T>();
                 }
             }

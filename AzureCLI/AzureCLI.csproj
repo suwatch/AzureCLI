@@ -57,6 +57,7 @@
     <Compile Include="Dropbox\SiteDropboxExtensions.cs" />
     <Compile Include="GitHub\SiteGitHubExtensions.cs" />
     <Compile Include="Git\SiteGitExtensions.cs" />
+    <Compile Include="PublishingCredentials.cs" />
     <Compile Include="ScmType.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\KuduHelper.cs" />

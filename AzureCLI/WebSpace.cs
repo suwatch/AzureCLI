@@ -36,6 +36,18 @@ namespace AzureCLI
             return await RdfeHelper.GetAsAsync<WebSpace>(url);
         }
 
+        public static async Task SetPublishingCredentialsAsync(string userName, string password)
+        {
+            string url = UriHelper.GetPublishingCredentialsUri();
+            await RdfeHelper.PutAsync(url, new PublishingCredentials { PublishingUserName = userName, PublishingPassword = password });
+        }
+
+        public static async Task<PublishingCredentials> GetPublishingCredentialsAsync()
+        {
+            string url = UriHelper.GetPublishingCredentialsUri();
+            return await RdfeHelper.GetAsAsync<PublishingCredentials>(url);
+        }
+
         public override string ToString()
         {
             return JObject.FromObject(this).ToString();
