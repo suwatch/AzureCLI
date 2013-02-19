@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using AzureCLI;
+using AzureCLI.Utils;
 
 namespace Samples
 {
@@ -15,14 +16,13 @@ namespace Samples
         {
             DumpCertificates();
 
-            //DumpCertificateByThumbprint("0799FBB37D9F13B1F741B96AF6FF5D0ECA0C1954");
+            DumpCertificateByThumbprint("0799FBB37D9F13B1F741B96AF6FF5D0ECA0C1954");
 
-            //DumpCertificateByName("-2013-");
+            DumpCertificateByName("-2013-");
 
-            //var cert = new X509Certificate2(fileName, password, X509KeyStorageFlags.Exportable);
-            //AddCertificate(cert);    
+            CreatAndAddNewCertificate();
 
-            //DeleteCertificate("23CEBF5965E54A286E1F7B46A16312FBE1489FEF");
+            DeleteCertificate("2DECAF2CF559B51A4D2B439E04D28010AFA67A36");
         }
 
         static void DumpCertificates()
@@ -47,9 +47,14 @@ namespace Samples
             }
         }
 
-        static void AddCertificate(X509Certificate2 certificate)
+        static void CreatAndAddNewCertificate()
         {
+            var certificate = CertHelper.CreateCertificate(new X500DistinguishedName("CN=Windows Azure Tools"), "This is testing!");
             Management.AddCertificate(certificate).Wait();
+
+            // Testing
+            PublishProfile.Current.ManagementCertificate = Convert.ToBase64String(certificate.Export(X509ContentType.Pfx));
+            DumpCertificates();
         }
 
         static void DeleteCertificate(string thumbprint)

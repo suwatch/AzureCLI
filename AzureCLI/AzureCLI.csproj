@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,6 +62,7 @@
     <Compile Include="Management.cs" />
     <Compile Include="PublishingCredentials.cs" />
     <Compile Include="ScmType.cs" />
+    <Compile Include="Utils\CertHelper.cs" />
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\KuduHelper.cs" />
     <Compile Include="Kudu\SiteKuduExtensions.cs" />
