@@ -34,6 +34,17 @@ namespace AzureCLI.Utils
             }
         }
 
+        public static async Task PostXmlAsync<T>(string url, T resource)
+        {
+            using (HttpClient client = RdfeHelper.NewHttpClient())
+            {
+                using (HttpResponseMessage response = await client.PostAsXmlAsync<T>(url, resource))
+                {
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+        }
+
         public static async Task DeleteAsync(string url)
         {
             using (HttpClient client = RdfeHelper.NewHttpClient())
@@ -55,6 +66,19 @@ namespace AzureCLI.Utils
 
                     // TODO: workaround RDFE bug that the response's header is fixed 'application/xml'
                     response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                    return await response.Content.ReadAsAsync<T>();
+                }
+            }
+        }
+
+        public static async Task<T> GetAsXmlAsync<T>(string url)
+        {
+            using (HttpClient client = RdfeHelper.NewHttpClient())
+            {
+                using (HttpResponseMessage response = await client.GetAsync(url))
+                {
+                    response.EnsureSuccessStatusCode();
 
                     return await response.Content.ReadAsAsync<T>();
                 }

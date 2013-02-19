@@ -27,6 +27,7 @@ namespace Samples
                 //BitbucketTests();
                 //CodePlexTests();
                 //DropboxTests();
+                //ManagementTests();
             }
             catch (Exception ex)
             {

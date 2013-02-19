@@ -48,6 +48,7 @@
     <Compile Include="GitHubTests.cs" />
     <Compile Include="GitTests.cs" />
     <Compile Include="KuduTests.cs" />
+    <Compile Include="ManagementTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TfsTests.cs" />

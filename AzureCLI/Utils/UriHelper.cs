@@ -83,5 +83,20 @@ namespace AzureCLI.Utils
                 webSpace,
                 siteName);
         }
+
+        public static string GetManagementCertificatesUri()
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/certificates",
+                profile.GetUrl(),
+                profile.GetSubscriptionId());
+        }
+
+        public static string GetManagementCertificateUri(string thumbprint)
+        {
+            return String.Format("{0}/{1}",
+                GetManagementCertificatesUri(),
+                thumbprint);
+        }
     }
 }
