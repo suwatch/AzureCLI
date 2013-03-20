@@ -17,8 +17,8 @@ namespace AzureCLI.Kudu
 
         public static async Task EnableKuduAsync(this WebSite site)
         {
-            string url = UriHelper.GetWebSiteRepositoryUri(site.WebSpace, site.Name);
-            await RdfeHelper.PostAsync(url, new { Name = site.Name, HostNames = site.HostNames });
+            string url = UriHelper.GetWebSiteConfigUri(site.WebSpace, site.Name);
+            await RdfeHelper.PutAsync(url, new { ScmType = ScmType.None.ToString() });
         }
 
         public static Uri GetKuduDeployUri(this WebSite site)
