@@ -64,6 +64,17 @@ namespace AzureCLI.Utils
                 includesProperties ? ("/?" + PropertiesToInclude) : String.Empty);
         }
 
+        public static string GetSwapWebSiteUrl(string webSpace, string siteName, string otherSiteName)
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}{4}",
+                profile.GetUrl(),
+                profile.GetSubscriptionId(),
+                webSpace,
+                siteName,
+                "/?Command=Swap&OtherSiteName=" + otherSiteName);
+        }
+
         public static string GetWebSiteConfigUri(string webSpace, string siteName)
         {
             PublishProfile profile = PublishProfile.Current;
