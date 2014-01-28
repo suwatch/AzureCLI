@@ -19,7 +19,7 @@ namespace AzureCLI
         public Nullable<int> ComputeMode { get; set; }
         public Nullable<int> CurrentNumberOfWorkers { get; set; }
         public Nullable<int> CurrentWorkerSize { get; set; }
-        public int NumberOfWorkers { get; set; }
+        public Nullable<int> NumberOfWorkers { get; set; }
         public string Plan { get; set; }
         public string Subscription { get; set; }
         public Nullable<int> WorkerSize { get; set; }

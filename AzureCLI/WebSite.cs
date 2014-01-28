@@ -74,10 +74,22 @@ namespace AzureCLI
             await RdfeHelper.DeleteAsync(url);
         }
 
-        public async Task SwapWebSite(WebSite otherSite)
+        public static async Task SyncWebSiteRepositoryAsync(string name, string webSpace)
         {
-            string url = UriHelper.GetSwapWebSiteUrl(WebSpace, Name, otherSite.Name);
+            string url = UriHelper.GetSyncWebSiteRepositoryUri(webSpace, name);
             await RdfeHelper.PostAsync(url, String.Empty);
+        }
+
+        public async Task SwapWebSiteSlots()
+        {
+            string url = UriHelper.GetSwapWebSiteSlotsUrl(WebSpace, Name);
+            await RdfeHelper.PostAsync(url, String.Empty);
+        }
+
+        public async Task<string[]> GetInstanceIds()
+        {
+            string url = UriHelper.GetWebSiteInstanceIdsUri(WebSpace, Name);
+            return await RdfeHelper.GetAsAsync<string[]>(url);
         }
 
         public override string ToString()

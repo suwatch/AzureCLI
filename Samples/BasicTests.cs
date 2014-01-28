@@ -25,7 +25,9 @@ namespace Samples
 
             //DeleteWebSite("azurecli01", "eastuswebspace");
 
-            SwapWebSite("azurestage01", "northeuropewebspace", "azureprod01");
+            //SwapWebSiteSlots("suwatchhk02", "eastasiawebspace");
+
+            SyncWebSiteRepository("suwatchdb02", "eastasiawebspace");
         }
 
         static void DumpWebSpaces()
@@ -64,6 +66,11 @@ namespace Samples
             WebSite.DeleteAsync(name, webSpace).Wait();
         }
 
+        static void SyncWebSiteRepository(string name, string webSpace)
+        {
+            WebSite.SyncWebSiteRepositoryAsync(name, webSpace).Wait();
+        }
+
         static void DumpWebSite(string name, string webSpace)
         {
             var item = WebSite.GetAsync(name, webSpace).Result;
@@ -72,11 +79,10 @@ namespace Samples
             Console.WriteLine(item);
         }
 
-        static void SwapWebSite(string name, string webSpace, string otherName)
+        static void SwapWebSiteSlots(string name, string webSpace)
         {
             var itemp = WebSite.GetAsync(name, webSpace).Result;
-            var otherItem = WebSite.GetAsync(otherName, webSpace).Result;
-            itemp.SwapWebSite(otherItem).Wait();
+            itemp.SwapWebSiteSlots().Wait();
         }
 
         static void SetGetPublishingCredentials()

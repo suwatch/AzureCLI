@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace AzureCLI.Utils
 {
-    static class RdfeHelper
+    public static class RdfeHelper
     {
-        public const string MS_VERSION_HEADER = "x-ms-version";
-        public const string MS_VERSION_HEADER_CONTENT = "2012-08-01";
+        private static NameValueHeaderValue X_MS_VERSION_HEADER = new NameValueHeaderValue("x-ms-version", "2013-10-01");
 
         public static async Task PutAsync<T>(string url, T resource)
         {
@@ -105,7 +104,7 @@ namespace AzureCLI.Utils
             var client = new HttpClient(handler);
             client.MaxResponseContentBufferSize = 2097152; // 2MB
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add(MS_VERSION_HEADER, MS_VERSION_HEADER_CONTENT);
+            client.DefaultRequestHeaders.Add(X_MS_VERSION_HEADER.Name, X_MS_VERSION_HEADER.Value);
             return client;
         }
     }

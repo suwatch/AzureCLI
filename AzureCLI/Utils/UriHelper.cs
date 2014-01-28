@@ -64,7 +64,7 @@ namespace AzureCLI.Utils
                 includesProperties ? ("/?" + PropertiesToInclude) : String.Empty);
         }
 
-        public static string GetSwapWebSiteUrl(string webSpace, string siteName, string otherSiteName)
+        public static string GetSwapWebSiteSlotsUrl(string webSpace, string siteName, string targetSlot = "staging")
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}{4}",
@@ -72,7 +72,7 @@ namespace AzureCLI.Utils
                 profile.GetSubscriptionId(),
                 webSpace,
                 siteName,
-                "/?Command=Swap&OtherSiteName=" + otherSiteName);
+                "/slots?Command=Swap&targetSlot=" + targetSlot);
         }
 
         public static string GetWebSiteConfigUri(string webSpace, string siteName)
@@ -89,6 +89,22 @@ namespace AzureCLI.Utils
         {
             PublishProfile profile = PublishProfile.Current;
             return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}/repository",
+                profile.GetUrl(),
+                profile.GetSubscriptionId(),
+                webSpace,
+                siteName);
+        }
+
+        public static string GetSyncWebSiteRepositoryUri(string webSpace, string siteName)
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return GetWebSiteRepositoryUri(webSpace, siteName) + "?action=sync";
+        }
+
+        public static string GetWebSiteInstanceIdsUri(string webSpace, string siteName)
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/services/webspaces/{2}/sites/{3}/instanceids",
                 profile.GetUrl(),
                 profile.GetSubscriptionId(),
                 webSpace,
