@@ -74,6 +74,7 @@
     <Compile Include="SiteProperties.cs" />
     <Compile Include="Tfs\SiteTfsExtensions.cs" />
     <Compile Include="Utils\UriHelper.cs" />
+    <Compile Include="WebHostingPlan.cs" />
     <Compile Include="WebSite.cs" />
     <Compile Include="WebSpace.cs" />
   </ItemGroup>

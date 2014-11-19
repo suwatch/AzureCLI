@@ -43,6 +43,25 @@ namespace AzureCLI.Utils
                 webSpace);
         }
 
+        public static string GetWebHostingPlansUri(string webSpace)
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/services/webspaces/{2}/serverFarms",
+                profile.GetUrl(),
+                profile.GetSubscriptionId(),
+                webSpace);
+        }
+
+        public static string GetWebHostingPlanUri(string webSpace, string webHostingPlan)
+        {
+            PublishProfile profile = PublishProfile.Current;
+            return String.Format("{0}/{1}/services/webspaces/{2}/serverFarms/{3}",
+                profile.GetUrl(),
+                profile.GetSubscriptionId(),
+                webSpace,
+                webHostingPlan);
+        }
+
         public static string GetWebSitesUri(string webSpace, bool includesProperties = true)
         {
             PublishProfile profile = PublishProfile.Current;

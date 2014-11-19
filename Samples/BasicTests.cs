@@ -17,6 +17,8 @@ namespace Samples
 
             //DumpWebSpace("eastuswebspace");
 
+            DumpWebHostingPlans("westuswebspace");
+
             //DumpWebSites();
 
             //CreateWebSite("azurecli01", "eastuswebspace");
@@ -27,7 +29,7 @@ namespace Samples
 
             //SwapWebSiteSlots("suwatchhk02", "eastasiawebspace");
 
-            SyncWebSiteRepository("suwatchdb02", "eastasiawebspace");
+            //SyncWebSiteRepository("suwatchdb02", "eastasiawebspace");
         }
 
         static void DumpWebSpaces()
@@ -44,6 +46,18 @@ namespace Samples
             var item = WebSpace.GetAsync(name).Result;
             Console.WriteLine(item.Name);
             Console.WriteLine(item);
+        }
+
+        static void DumpWebHostingPlans(string name)
+        {
+            foreach (var item in WebHostingPlan.GetAllAsync(name).Result)
+            {
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item);
+            }
+
+            //Console.WriteLine(WebHostingPlan.GetAsync(name, "Default1").Result);
+            //WebHostingPlan.UpdateAdminSite(name, "Default1", "suwatadmin").Wait();
         }
 
         static void DumpWebSites()
