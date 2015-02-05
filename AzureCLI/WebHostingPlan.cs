@@ -59,7 +59,8 @@ namespace AzureCLI
         public static async Task UpdateAdminSite(string webSpace, string webHostingPlan, string adminSite)
         {
             string url = UriHelper.GetWebHostingPlanUri(webSpace, webHostingPlan);
-            await RdfeHelper.PutAsync(url, new { AdminSiteName = adminSite });
+            // Name property is to work around the Operation lock ANT43 issue
+            await RdfeHelper.PutAsync(url, new { Name = webHostingPlan, AdminSiteName = adminSite });
         }
 
         public override string ToString()
